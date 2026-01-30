@@ -1,8 +1,9 @@
 {
   description = "l1nc5's nix-config";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-zed.url = "github:nixos/nixpkgs/6b51cbf735e07b2851dc3fc78dd6ff41198dd393";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,32 +28,27 @@
   };
 
   outputs = inputs @ {
-    self,
+    flake-parts,
     nixpkgs,
-    home-manager,
-    nixos-hardware,
     ...
-  }: let
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations.alchemist = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {inherit inputs;};
-      modules = [
-        {
-          nixpkgs.config.allowUnfree = true;
-        }
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
 
-        ./system/hosts/alchemist
-        nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.l1nc5 = import ./home/profiles/l1nc5/home.nix;
-        }
-      ];
+      flake.nixosConfigurations.alchemist = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          {nixpkgs.config.allowUnfree = true;}
+          ./system/hosts/alchemist
+          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.users.l1nc5 = import ./home/profiles/l1nc5/home.nix;
+          }
+        ];
+      };
     };
-  };
 }
