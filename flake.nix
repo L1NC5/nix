@@ -35,20 +35,17 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
-      flake.nixosConfigurations.alchemist = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          {nixpkgs.config.allowUnfree = true;}
-          ./system/hosts/alchemist
-          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs;};
-            home-manager.users.l1nc5 = import ./home/profiles/l1nc5/home.nix;
-          }
-        ];
+      flake = {
+        nixosConfigurations = {
+          alchemist = nixpkgs.lib.nixosSystem {
+            specialArgs = {inherit inputs;};
+            modules = [
+              ./system/hosts/alchemist
+              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
+              inputs.home-manager.nixosModules.home-manager
+            ];
+          };
+        };
       };
     };
 }

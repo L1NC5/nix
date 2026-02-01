@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: let
+  username = "l1nc5";
+in {
   imports = [
     ./hardware-configuration.nix
 
@@ -14,40 +20,51 @@
 
   networking.hostName = "alchemist";
   networking.networkmanager.enable = true;
-
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "it_IT.UTF-8";
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  nixpkgs.config.allowUnfree = true;
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
   hardware.cpu.amd.updateMicrocode = true;
 
-  services.keyd = {
-    enable = true;
-    keyboards.default.settings = {
-      main = {
-        capslock = "overload(control,esc)";
-        esc = "capslock";
+  services = {
+    keyd = {
+      enable = true;
+      keyboards.default.settings = {
+        main = {
+          capslock = "overload(control,esc)";
+          esc = "capslock";
+        };
       };
+    };
+
+    sabnzbd = {
+      enable = true;
+      openFirewall = true;
+      user = username;
+      group = "users";
     };
   };
 
-  services.sabnzbd = {
-    enable = true;
-    openFirewall = true;
-    user = "l1nc5";
-    group = "users";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.l1nc5 = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "l1nc5";
+    description = username;
     extraGroups = [
       "networkmanager"
       "sabnzbd"
       "wheel"
     ];
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs;};
+    users.${username} = import "${inputs.self}/home/profiles/${username}/home.nix";
   };
 
   programs = {
