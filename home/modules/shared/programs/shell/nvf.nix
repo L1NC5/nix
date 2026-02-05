@@ -51,6 +51,12 @@
         lightbulb.enable = true;
         trouble.enable = true;
         otter-nvim.enable = true;
+
+        servers = {
+          nil = {
+            settings.nil.nix.autoArchive = true;
+          };
+        };
       };
 
       languages = {
@@ -58,7 +64,10 @@
         enableTreesitter = true;
         enableExtraDiagnostics = true;
 
-        nix.enable = true;
+        nix = {
+          enable = true;
+        };
+
         markdown.enable = true;
         bash.enable = true;
         css.enable = true;

@@ -24,7 +24,7 @@ output "eDP-1" {
     // off
     mode "1920x1080@60"
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 1.1
+    scale 1
     // position x=1920 y=0
 }
 // https://yalter.github.io/niri/Configuration:-Layout
