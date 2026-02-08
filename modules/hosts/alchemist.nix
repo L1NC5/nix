@@ -8,8 +8,8 @@
 
   flake.nixosConfigurations.alchemist = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      self.nixosModules.host_alchemist
-      self.nixosModules.bluetooth
+      self.modules.nixos.host-alchemist
+      self.modules.nixos.system-laptop
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
       # system specific:
       # configure audio interface's LEDs when loading is complete
@@ -24,8 +24,8 @@
     ];
   };
 
-  flake.nixosModules.host_alchemist =
-    { pkgs, ... }:
+  flake.modules.nixos.host-alchemist =
+    { ... }:
     let
       username = "l1nc5";
     in
