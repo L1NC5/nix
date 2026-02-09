@@ -33,10 +33,6 @@
 
         "${self}/system/hosts/alchemist/hardware-configuration.nix"
 
-        "${self}/system/modules/hardware/graphics.nix"
-        "${self}/system/modules/hardware/laptop.nix"
-        "${self}/system/modules/hardware/laptop-lid.nix"
-
         "${self}/system/roles/desktop.nix"
       ];
 

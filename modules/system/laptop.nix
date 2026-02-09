@@ -6,6 +6,8 @@
       imports = [
         inputs.self.modules.nixos.bluetooth
         inputs.self.modules.nixos.graphics
+        inputs.self.modules.nixos.power-management
+        inputs.self.modules.nixos.laptop-lid
       ];
     };
 }
