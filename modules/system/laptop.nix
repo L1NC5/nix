@@ -4,8 +4,8 @@
     { ... }:
     {
       imports = [
-        inputs.self.modules.nixos.nix
         inputs.self.modules.nixos.bluetooth
+        inputs.self.modules.nixos.graphics
       ];
     };
 }

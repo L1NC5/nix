@@ -4,8 +4,6 @@
   ...
 }:
 {
-  systems = [ "x86_64-linux" ];
-
   flake.nixosConfigurations.alchemist = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.modules.nixos.host-alchemist
@@ -35,8 +33,6 @@
 
         "${self}/system/hosts/alchemist/hardware-configuration.nix"
 
-        "${self}/system/modules/nix-settings.nix"
-        # "${self}/system/modules/hardware/bluetooth.nix"
         "${self}/system/modules/hardware/graphics.nix"
         "${self}/system/modules/hardware/laptop.nix"
         "${self}/system/modules/hardware/laptop-lid.nix"
