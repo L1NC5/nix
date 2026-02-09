@@ -8,17 +8,8 @@
     modules = [
       self.modules.nixos.host-alchemist
       self.modules.nixos.system-laptop
+      self.modules.nixos.alchemist-led
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
-      # system specific:
-      # configure audio interface's LEDs when loading is complete
-      (
-        { pkgs, ... }:
-        {
-          services.udev.extraRules = ''
-            SUBSYSTEM=="sound", ACTION=="add", KERNEL=="controlC*", RUN+="${pkgs.bash}/bin/bash -c 'sleep 1; echo follow-route > /sys/class/sound/ctl-led/mic/mode; echo off > /sys/class/sound/ctl-led/speaker/mode'"
-          '';
-        }
-      )
     ];
   };
 
@@ -30,9 +21,7 @@
     {
       imports = [
         inputs.home-manager.nixosModules.home-manager
-
         "${self}/system/hosts/alchemist/hardware-configuration.nix"
-
         "${self}/system/roles/desktop.nix"
       ];
 
