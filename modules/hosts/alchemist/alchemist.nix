@@ -7,6 +7,7 @@
   flake.nixosConfigurations.alchemist = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.modules.nixos.host-alchemist
+      self.modules.nixos.hardware-alchemist
       self.modules.nixos.system-laptop
       self.modules.nixos.alchemist-led
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
@@ -21,8 +22,6 @@
     {
       imports = [
         inputs.home-manager.nixosModules.home-manager
-        "${self}/system/hosts/alchemist/hardware-configuration.nix"
-        "${self}/system/roles/desktop.nix"
       ];
 
       networking.hostName = "alchemist";
