@@ -4,6 +4,8 @@
     { ... }:
     {
       imports = [
+        inputs.self.modules.nixos.system-core
+
         # Hardware modules
         inputs.self.modules.nixos.bluetooth
         inputs.self.modules.nixos.graphics
