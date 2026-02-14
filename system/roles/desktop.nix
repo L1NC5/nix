@@ -1,10 +1,5 @@
-{pkgs, ...}: {
-  imports = [
-    ../modules/services/gnome.nix
-    ../modules/services/pipewire.nix
-    ../modules/services/wayland.nix
-  ];
-
+{ pkgs, ... }:
+{
   services.printing.enable = true;
   security.rtkit.enable = true;
 
@@ -20,7 +15,5 @@
     wget
     tree
     fastfetch
-    # Keymapper
-    keyd
   ];
 }

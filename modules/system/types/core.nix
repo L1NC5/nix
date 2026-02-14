@@ -5,6 +5,9 @@
     {
       imports = [
         inputs.self.modules.nixos.nix-settings
+
+        # Services
+        inputs.self.modules.nixos.keyd
       ];
     };
 }
