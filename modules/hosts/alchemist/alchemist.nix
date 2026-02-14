@@ -35,7 +35,6 @@
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
       };
-      hardware.cpu.amd.updateMicrocode = true;
 
       services = {
         keyd = {
