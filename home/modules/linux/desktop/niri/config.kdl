@@ -2,8 +2,8 @@
 input {
     keyboard {
         xkb {
-            layout "en"
-            variant "intl"
+            layout "us"
+            variant "altgr-intl"
         }
     }
     touchpad {
