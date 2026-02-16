@@ -6,24 +6,24 @@
 {
   flake.nixosConfigurations.alchemist = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      self.modules.nixos.host-alchemist
-      self.modules.nixos.hardware-alchemist
+      # Global modules
       self.modules.nixos.system-laptop
+
+      # Host specific modules
+      self.modules.nixos.hardware-alchemist
+      self.modules.nixos.host-alchemist
       self.modules.nixos.alchemist-led
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
+
+      # Home Manager
+      self.modules.nixos.homeManager
+      self.modules.nixos.l1nc5
     ];
   };
 
   flake.modules.nixos.host-alchemist =
     { ... }:
-    let
-      username = "l1nc5";
-    in
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-      ];
-
       networking.hostName = "alchemist";
       networking.networkmanager.enable = true;
       time.timeZone = "Europe/Rome";
@@ -40,26 +40,9 @@
         sabnzbd = {
           enable = true;
           openFirewall = true;
-          user = username;
+          user = "l1nc5";
           group = "users";
         };
-      };
-
-      users.users.${username} = {
-        isNormalUser = true;
-        description = username;
-        extraGroups = [
-          "networkmanager"
-          "sabnzbd"
-          "wheel"
-        ];
-      };
-
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        extraSpecialArgs = { inherit inputs; };
-        users.${username} = import "${inputs.self}/home/profiles/${username}/home.nix";
       };
 
       programs = {
