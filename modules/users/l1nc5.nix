@@ -4,6 +4,7 @@
     imports = [
       inputs.self.modules.nixos.homeManager
       inputs.self.modules.nixos.telegram-desktop
+      inputs.self.modules.nixos.keyd
     ];
 
     home-manager.users.l1nc5 = {
@@ -20,6 +21,13 @@
         "sabnzbd"
         "wheel"
       ];
+    };
+
+    services.keyd.keyboards.default.settings = {
+      main = {
+        capslock = "overload(control,esc)";
+        esc = "capslock";
+      };
     };
   };
 

@@ -1,15 +1,15 @@
 {
   flake.modules.nixos.wayland-de =
-    { ... }:
+    { lib, ... }:
     {
-      services.xserver.enable = false;
+      services.xserver.enable = lib.mkDefault false;
       services.displayManager = {
         sddm = {
-          wayland.enable = true;
-          enable = true;
+          wayland.enable = lib.mkDefault true;
+          enable = lib.mkDefault true;
           settings = {
             Wayland = {
-              EnableHiDPI = true;
+              EnableHiDPI = lib.mkDefault true;
             };
           };
         };

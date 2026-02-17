@@ -17,5 +17,6 @@
         inputs.self.modules.nixos.pipewire
         inputs.self.modules.nixos.wayland-de
       ];
+      services.printing.enable = true;
     };
 }
