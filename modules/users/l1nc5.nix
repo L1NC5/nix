@@ -3,6 +3,7 @@
   flake.modules.nixos.l1nc5 = {
     imports = [
       inputs.self.modules.nixos.homeManager
+      inputs.self.modules.nixos.telegram-desktop
     ];
 
     home-manager.users.l1nc5 = {
