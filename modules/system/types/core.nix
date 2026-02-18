@@ -3,9 +3,9 @@
   flake.modules.nixos.system-core =
     { pkgs, ... }:
     {
-      imports = [
-        inputs.self.modules.nixos.nix-settings
-        inputs.self.modules.nixos.keyd
+      imports = with inputs.self.modules.nixos; [
+        nix-settings
+        keyd
       ];
 
       environment.systemPackages = with pkgs; [
