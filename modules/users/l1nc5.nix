@@ -30,21 +30,54 @@
     };
   };
 
-  flake.modules.homeManager.l1nc5 = {
-    imports = [
-      "${inputs.self}/home/profiles/l1nc5/home.nix"
-    ];
+  flake.modules.homeManager.l1nc5 =
+    { pkgs, ... }:
+    {
+      imports = [
+        # Dev
+        inputs.self.modules.homeManager.lazygit
+        inputs.self.modules.homeManager.zed
 
-    programs = {
-      git = {
-        enable = true;
-        settings = {
-          user = {
-            name = "L1NC5";
-            email = "barbieri.federico96@gmail.com";
+        # Browsers
+        inputs.self.modules.homeManager.chromium
+        inputs.self.modules.homeManager.zen-browser
+
+        # Themes
+        ## Font
+        inputs.self.modules.homeManager.recursive
+
+        "${inputs.self}/home/profiles/l1nc5/home.nix"
+      ];
+
+      home = {
+        username = "l1nc5";
+        homeDirectory = "/home/l1nc5";
+        packages = with pkgs; [
+          home-manager
+          yazi
+          ripgrep
+          jq
+          eza
+          fzf
+          mtr
+        ];
+        stateVersion = "25.11";
+      };
+
+      programs = {
+        bash = {
+          enable = true;
+          enableCompletion = true;
+        };
+        git = {
+          enable = true;
+          settings = {
+            user = {
+              name = "L1NC5";
+              email = "barbieri.federico96@gmail.com";
+            };
           };
         };
       };
     };
-  };
 }
