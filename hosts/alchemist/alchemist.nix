@@ -45,10 +45,6 @@
         };
       };
 
-      programs = {
-        niri.enable = true;
-      };
-
       # this value determines the nixos release from which the default
       # settings for stateful data, like file locations and database versions
       # on your system were taken. it‘s perfectly fine and recommended to leave

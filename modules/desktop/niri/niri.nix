@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.niri =
-    { config, lib, ... }:
+    { config, ... }:
     let
       configPath = "${config.home.homeDirectory}/nix/modules/desktop/niri";
     in

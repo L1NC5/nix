@@ -4,12 +4,18 @@
     imports = with inputs.self.modules.nixos; [
       keyd
       telegram-desktop
+
+      # Desktop
+      sddm
     ];
 
     home-manager.users.l1nc5 = {
       imports = with inputs.self.modules.homeManager; [
         l1nc5
+
+        # Desktop
         niri
+        noctalia
       ];
     };
 
@@ -43,8 +49,10 @@
         inputs.self.modules.homeManager.chromium
         inputs.self.modules.homeManager.zen-browser
 
+        # Shell
+        inputs.self.modules.homeManager.fastfetch
+
         # Themes
-        ## Font
         inputs.self.modules.homeManager.recursive
 
         "${inputs.self}/home/profiles/l1nc5/home.nix"
