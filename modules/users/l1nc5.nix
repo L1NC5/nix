@@ -2,13 +2,14 @@
 {
   flake.modules.nixos.l1nc5 = {
     imports = with inputs.self.modules.nixos; [
-      telegram-desktop
       keyd
+      telegram-desktop
     ];
 
     home-manager.users.l1nc5 = {
       imports = with inputs.self.modules.homeManager; [
         l1nc5
+        niri
       ];
     };
 

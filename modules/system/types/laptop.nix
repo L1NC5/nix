@@ -15,7 +15,7 @@
         # Services
         gnome-keyring
         pipewire
-        wayland-de
+        sddm
       ];
       services.printing.enable = true;
     };

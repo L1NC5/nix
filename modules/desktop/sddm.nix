@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.wayland-de =
+  flake.modules.nixos.sddm =
     { lib, ... }:
     {
       services.xserver.enable = lib.mkDefault false;

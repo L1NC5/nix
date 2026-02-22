@@ -30,9 +30,8 @@ output "eDP-1" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 10
+    gaps 6
     center-focused-column "never"
-    always-center-single-column
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -55,7 +54,7 @@ layout {
         urgent-color "#9b0000"
     }
     shadow {
-        on
+        // on
         softness 30
         spread 5
         offset x=0 y=5
@@ -109,7 +108,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 6
     clip-to-geometry true
 }
 
