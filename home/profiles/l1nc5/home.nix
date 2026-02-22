@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/shared
     ../../modules/linux/desktop
@@ -27,16 +28,6 @@
     bash = {
       enable = true;
       enableCompletion = true;
-    };
-
-    git = {
-      enable = true;
-      settings = {
-        user = {
-          name = "Federico Barbieri";
-          email = "barbieri.federico96@gmail.com";
-        };
-      };
     };
   };
 }

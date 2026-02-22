@@ -2,7 +2,6 @@
 {
   flake.modules.nixos.l1nc5 = {
     imports = with inputs.self.modules.nixos; [
-      homeManager
       telegram-desktop
       keyd
     ];
@@ -35,5 +34,17 @@
     imports = [
       "${inputs.self}/home/profiles/l1nc5/home.nix"
     ];
+
+    programs = {
+      git = {
+        enable = true;
+        settings = {
+          user = {
+            name = "L1NC5";
+            email = "barbieri.federico96@gmail.com";
+          };
+        };
+      };
+    };
   };
 }
