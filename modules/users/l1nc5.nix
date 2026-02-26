@@ -14,6 +14,7 @@
         l1nc5
 
         # Desktop
+        bibata
         niri
         noctalia
       ];

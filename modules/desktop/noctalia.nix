@@ -23,7 +23,7 @@
             floating = false;
             marginVertical = 0.25;
             marginHorizontal = 0.25;
-            outerConrners = true;
+            outerCorners = true;
             widgets = {
               left = [
                 {
