@@ -13,6 +13,7 @@
       useGlobalPkgs = lib.mkDefault true;
       useUserPackages = lib.mkDefault true;
       extraSpecialArgs = { inherit inputs; };
+      backupFileExtension = ".bak";
     };
   };
 }
