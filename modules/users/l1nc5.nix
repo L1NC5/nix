@@ -41,22 +41,25 @@
   flake.modules.homeManager.l1nc5 =
     { pkgs, ... }:
     {
-      imports = [
+      imports = with inputs.self.modules.homeManager; [
         # Dev
-        inputs.self.modules.homeManager.lazygit
-        inputs.self.modules.homeManager.zed
+        lazygit
+        zed
 
         # Browsers
-        inputs.self.modules.homeManager.chromium
-        inputs.self.modules.homeManager.zen-browser
+        chromium
+        zen-browser
+
+        # Media
+        mpv
 
         # Shell
-        inputs.self.modules.homeManager.fastfetch
+        fastfetch
+        kitty
+        starship
 
         # Themes
-        inputs.self.modules.homeManager.recursive
-
-        "${inputs.self}/home/profiles/l1nc5/home.nix"
+        recursive
       ];
 
       home = {
