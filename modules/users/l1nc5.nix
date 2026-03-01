@@ -1,42 +1,47 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.l1nc5 = {
-    imports = with inputs.self.modules.nixos; [
-      keyd
-      telegram-desktop
-
-      # Desktop
-      sddm
-    ];
-
-    home-manager.users.l1nc5 = {
-      imports = with inputs.self.modules.homeManager; [
-        l1nc5
+  flake.modules.nixos.l1nc5 =
+    { pkgs, ... }:
+    {
+      imports = with inputs.self.modules.nixos; [
+        keyd
+        telegram-desktop
 
         # Desktop
-        bibata
-        niri
-        noctalia
+        sddm
       ];
-    };
 
-    users.users.l1nc5 = {
-      isNormalUser = true;
-      description = "l1nc5";
-      extraGroups = [
-        "networkmanager"
-        "sabnzbd"
-        "wheel"
-      ];
-    };
+      home-manager.users.l1nc5 = {
+        imports = with inputs.self.modules.homeManager; [
+          l1nc5
 
-    services.keyd.keyboards.default.settings = {
-      main = {
-        capslock = "overload(control,esc)";
-        esc = "capslock";
+          # Desktop
+          bibata
+          niri
+          noctalia
+        ];
       };
+
+      users.users.l1nc5 = {
+        isNormalUser = true;
+        description = "l1nc5";
+        shell = pkgs.zsh;
+        extraGroups = [
+          "networkmanager"
+          "sabnzbd"
+          "wheel"
+        ];
+      };
+
+      services.keyd.keyboards.default.settings = {
+        main = {
+          capslock = "overload(control,esc)";
+          esc = "capslock";
+        };
+      };
+
+      programs.zsh.enable = true;
     };
-  };
 
   flake.modules.homeManager.l1nc5 =
     { pkgs, ... }:
@@ -57,6 +62,7 @@
         fastfetch
         kitty
         starship
+        zsh
 
         # Themes
         recursive
