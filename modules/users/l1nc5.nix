@@ -62,6 +62,7 @@
         fastfetch
         kitty
         starship
+        zellij
         zsh
 
         # Themes

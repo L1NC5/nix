@@ -16,7 +16,7 @@
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
 
       # Home Manager
-      self.modules.nixos.homeManager
+      self.modules.nixos.home-base
       self.modules.nixos.l1nc5
     ];
   };
