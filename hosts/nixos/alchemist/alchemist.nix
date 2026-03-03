@@ -5,19 +5,19 @@
 }:
 {
   flake.nixosConfigurations.alchemist = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
+    modules = with self.modules.nixos; [
       # Global modules
-      self.modules.nixos.system-laptop
+      system-laptop
 
       # Host specific modules
-      self.modules.nixos.hardware-alchemist
-      self.modules.nixos.host-alchemist
-      self.modules.nixos.alchemist-led
+      hardware-alchemist
+      host-alchemist
+      alchemist-led
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
 
       # Home Manager
-      self.modules.nixos.home-base
-      self.modules.nixos.l1nc5
+      home-base
+      l1nc5
     ];
   };
 

@@ -7,7 +7,7 @@
         enableZshIntegration = true;
         settings = {
           show_startup_tips = false;
-          theme = "nightfox";
+          theme = "kanagawa";
         };
       };
     };
