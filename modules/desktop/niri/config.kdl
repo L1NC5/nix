@@ -43,8 +43,8 @@ layout {
     focus-ring {
         // off
         width 1
-        active-color "#7fc8ff"
-        inactive-color "#505050"
+        active-color "#aeaed1"
+        inactive-color "#606079"
     }
     border {
         off
@@ -61,8 +61,6 @@ layout {
         color "#0005"
     }
 }
-
-spawn-sh-at-startup "noctalia-shell"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -353,3 +351,5 @@ gestures {
         off
     }
 }
+
+spawn-at-startup "noctalia-shell"
