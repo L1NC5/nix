@@ -1,0 +1,17 @@
+{
+  flake.modules.homeManager.zoxide =
+    { ... }:
+    {
+      programs = {
+        zoxide = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+        zsh = {
+          shellAliases = {
+            cd = "z";
+          };
+        };
+      };
+    };
+}

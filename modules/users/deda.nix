@@ -4,11 +4,14 @@
     { pkgs, ... }:
     {
       imports = with inputs.self.modules.homeManager; [
+        bat
+        eza
         lazygit
         fastfetch
         starship
         zellij
         zsh
+        zoxide
       ];
 
       home = {
@@ -18,28 +21,27 @@
           home-manager
           ripgrep
           jq
-          eza
           fzf
         ];
         stateVersion = "26.05";
+      };
 
-        programs = {
-          git = {
-            enable = true;
-            settings = {
-              user = {
-                name = "Federico Barbieri";
-                email = "federico.barbieri@dedagroup.it";
-              };
+      programs = {
+        git = {
+          enable = true;
+          settings = {
+            user = {
+              name = "Federico Barbieri";
+              email = "federico.barbieri@dedagroup.it";
             };
           };
-          zsh = {
-            profileExtra = ''
-              if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh"]; then
-                . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-              fi
-            '';
-          };
+        };
+        zsh = {
+          profileExtra = ''
+            if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+              . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+            fi
+          '';
         };
       };
     };
