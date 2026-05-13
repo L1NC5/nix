@@ -1,10 +1,17 @@
 {
   flake.modules.homeManager.zellij =
-    { config, lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       programs = {
         zellij = {
           enable = true;
+          enableZshIntegration = true;
+          attachExistingSession = true;
           settings = {
             show_startup_tips = false;
             theme = "vague";
@@ -137,13 +144,6 @@
               };
             };
           };
-        };
-        zsh = {
-          initExtra = ''
-            if [[ -z "$ZELLIJ" ]]; then
-              zellij attach -c main
-            fi
-          '';
         };
       };
     };
