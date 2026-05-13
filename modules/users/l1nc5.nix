@@ -58,11 +58,14 @@
         # Media
         mpv
 
-        # Shell
+        # cli
+        bat
+        eza
         fastfetch
         kitty
         starship
         zellij
+        zoxide
         zsh
 
         # Themes
@@ -77,7 +80,6 @@
           yazi
           ripgrep
           jq
-          eza
           fzf
           mtr
         ];
