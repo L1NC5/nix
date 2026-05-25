@@ -62,6 +62,7 @@
         bat
         eza
         fastfetch
+        gh-dash
         kitty
         starship
         zellij
