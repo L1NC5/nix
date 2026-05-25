@@ -49,12 +49,8 @@
             "toolkit.cosmeticAnimations.enabled" = false;
 
             "gfx.webrender.all" = true;
-            "gfx.webrender.compositor" = true;
-            "layers.acceleration.force-enabled" = true;
-            "widget.dmabuf.force-enabled" = true;
 
             "media.ffmpeg.vaapi.enabled" = true;
-            "media.hardware-video-decoding.force-enabled" = true;
             "media.av1.enabled" = false;
           };
         };
