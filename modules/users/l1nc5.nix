@@ -64,6 +64,7 @@
         fastfetch
         gh-dash
         kitty
+        nh
         starship
         zellij
         zoxide
