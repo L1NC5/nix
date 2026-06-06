@@ -35,8 +35,7 @@
 
       services.keyd.keyboards.default.settings = {
         main = {
-          capslock = "overload(control,esc)";
-          esc = "capslock";
+          capslock = "leftcontrol";
         };
       };
 
@@ -97,7 +96,7 @@
           enable = true;
           settings = {
             user = {
-              name = "L1NC5";
+              name = "Federico Barbieri";
               email = "barbieri.federico96@gmail.com";
             };
           };
