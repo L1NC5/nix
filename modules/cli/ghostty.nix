@@ -10,7 +10,7 @@
           background-opacity = "0.9";
           background-blur = true;
           font-family = "Rec Mono Semicasual";
-          theme = "Kanso Mist";
+          theme = "Ayu";
         };
       };
     };
