@@ -66,7 +66,7 @@
         ghostty
         nh
         starship
-        zellij
+        tmux
         zoxide
         zsh
 
