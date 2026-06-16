@@ -1,80 +1,14 @@
+{ noctaliaModule, ... }:
 {
   flake.modules.homeManager.noctalia =
-    { inputs, ... }:
+    { ... }:
     {
       imports = [
-        inputs.noctalia.homeModules.default
+        noctaliaModule
       ];
 
       programs.noctalia = {
         enable = true;
-        settings = {
-          appLauncher = {
-            terminalCommand = "kitty";
-          };
-
-          bar = {
-            position = "top";
-            density = "default";
-            transparent = true;
-            showOutline = false;
-            showCapsule = true;
-            capsuleOpacity = 1;
-            floating = false;
-            marginVertical = 0.25;
-            marginHorizontal = 0.25;
-            outerCorners = true;
-            widgets = {
-              left = [
-                {
-                  id = "Workspace";
-                }
-                {
-                  id = "ActiveWindow";
-                }
-              ];
-              center = [
-                {
-                  id = "Clock";
-                }
-              ];
-              right = [
-                {
-                  id = "ScreenRecorder";
-                }
-                {
-                  id = "Tray";
-                }
-                {
-                  id = "NotificationHistory";
-                }
-                {
-                  id = "Battery";
-                }
-                {
-                  id = "Brightness";
-                }
-                {
-                  id = "Volume";
-                }
-                {
-                  id = "ControlCenter";
-                }
-              ];
-            };
-          };
-
-          dock.enabled = false;
-
-          general = {
-            lockOnSuspend = true;
-          };
-
-          location = {
-            name = "Livorno";
-            weatherEnabled = true;
-          };
-        };
       };
     };
 }

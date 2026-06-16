@@ -41,5 +41,10 @@
         (inputs.import-tree ./hosts)
         (inputs.import-tree ./modules)
       ];
+
+      _module.args = {
+        inherit inputs;
+        noctaliaModule = inputs.noctalia.homeModules.default;
+      };
     };
 }
