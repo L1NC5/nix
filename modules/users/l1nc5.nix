@@ -59,10 +59,11 @@
 
         # cli
         bat
+        direnv
         eza
         fastfetch
         gh-dash
-        kitty
+        ghostty
         nh
         starship
         zellij

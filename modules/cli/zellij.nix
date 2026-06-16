@@ -1,9 +1,6 @@
 {
   flake.modules.homeManager.zellij =
     {
-      config,
-      lib,
-      pkgs,
       ...
     }:
     {
