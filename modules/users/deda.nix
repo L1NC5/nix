@@ -9,7 +9,7 @@
         lazygit
         fastfetch
         starship
-        zellij
+        tmux
         zsh
         zoxide
       ];
