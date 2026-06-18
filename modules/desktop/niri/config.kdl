@@ -115,8 +115,8 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: Ghostty" { spawn "ghostty"; }
     Mod+B hotkey-overlay-title="Open web Browser: Zen" { spawn "zen-beta"; }
     Mod+Z hotkey-overlay-title="Open code editor: Zed" { spawn "zeditor"; }
-    Mod+Space hotkey-overlay-title="Open launcher: Noctalia" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+Alt+L hotkey-overlay-title="Lock the Screen: Noctalia" { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Mod+Space hotkey-overlay-title="Open launcher: Noctalia" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+Alt+L hotkey-overlay-title="Lock the Screen: Noctalia" { spawn "noctalia" "ipc" "call" "lockScreen" "lock"; }
 
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
