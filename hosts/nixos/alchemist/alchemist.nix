@@ -27,7 +27,7 @@
       networking.hostName = "alchemist";
       networking.networkmanager.enable = true;
       time.timeZone = "Europe/Rome";
-      i18n.defaultLocale = "it_IT.UTF-8";
+      i18n.defaultLocale = "en_US.UTF-8";
 
       nixpkgs.config.allowUnfree = true;
 
