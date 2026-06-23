@@ -33,8 +33,6 @@ order = [ "widgets" ]
         "clipboard",
         "network",
         "bluetooth",
-        "volume",
-        "brightness",
         "battery",
         "control-center",
         "session"

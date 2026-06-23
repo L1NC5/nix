@@ -18,11 +18,15 @@
       # Home Manager
       home-base
       l1nc5
+
+      # nvf
+      inputs.nvf.nixosModules.default
+      nvf
     ];
   };
 
   flake.modules.nixos.host-alchemist =
-    { ... }:
+    { pkgs, ... }:
     {
       networking.hostName = "alchemist";
       networking.networkmanager.enable = true;
@@ -35,6 +39,8 @@
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
       };
+
+      environment.systemPackages = with pkgs; [ lmstudio ];
 
       services = {
         sabnzbd = {

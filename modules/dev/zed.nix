@@ -27,6 +27,10 @@
                     "expr" =
                       "(builtins.getFlake \"${../../.}\").nixosConfigurations.alchemist.options.home-manager.users.type.nestedTypes.elemType.getSubOptions []";
                   };
+                  "nvf" = {
+                    "expr" =
+                      "((builtins.getFlake \"github:NotAShelf/nvf\").lib.neovimConfiguration { pkgs = import (builtins.getFlake \"github:nixos/nixpkgs/nixos-unstable\") {}; modules = []; }).options";
+                  };
                 };
                 "diagnostic" = {
                   "suppress" = [ "unbound-variable" ];

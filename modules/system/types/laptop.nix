@@ -13,6 +13,7 @@
         power-management
 
         # Services
+        plymouth
         gnome-keyring
         pipewire
         sddm
