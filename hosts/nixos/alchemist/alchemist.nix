@@ -18,10 +18,6 @@
       # Home Manager
       home-base
       l1nc5
-
-      # nvf
-      inputs.nvf.nixosModules.default
-      nvf
     ];
   };
 

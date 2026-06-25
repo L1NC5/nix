@@ -42,6 +42,14 @@
         (inputs.import-tree ./modules)
       ];
 
+      perSystem = { pkgs, ... }: {
+        packages.neovim =
+          (inputs.nvf.lib.neovimConfiguration {
+            inherit pkgs;
+            modules = [ ./nvf/nvf-config.nix ];
+          }).neovim;
+      };
+
       _module.args = {
         inherit inputs;
         noctaliaModule = inputs.noctalia.homeModules.default;
