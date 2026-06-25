@@ -6,8 +6,10 @@
       imports = with inputs.self.modules.homeManager; [
         bat
         eza
-        lazygit
         fastfetch
+        lazygit
+       	nh
+        nvf
         starship
         tmux
         zsh
@@ -19,9 +21,11 @@
         homeDirectory = "/home/deda";
         packages = with pkgs; [
           home-manager
+          nixd
           ripgrep
           jq
           fzf
+          nodejs
         ];
         stateVersion = "26.05";
       };
