@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./modules/base.nix
@@ -10,14 +10,19 @@
   config.vim = {
     binds.whichKey.enable = true;
     comments.comment-nvim.enable = true;
-    # keymaps = [
-    #   {
-    #     key = "<leader>e";
-    #     mode = "n";
-    #     silent = true;
-    #     action = "<cmd>lua MiniFiles.open()<cr>";
-    #     desc = "Open file explorer";
-    #   }
-    # ];
+    theme.enable = false;
+    ui = {
+      ui2.enable = true;
+      colorizer.enable = true;
+      # nvim-ufo.enable = true;
+    };
+
+    extraPlugins = {
+      cole = {
+        setup = ''
+          vim.cmd.colorscheme("cole")
+        '';
+      };
+    };
   };
 }
