@@ -1,4 +1,15 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  vague-nvim-src,
+  pkgs,
+  ...
+}:
+let
+  vague-plugin = pkgs.vimUtils.buildVimPlugin {
+    name = "vague-nvim";
+    src = vague-nvim-src;
+  };
+in
 {
   imports = [
     ./modules/base.nix
@@ -18,9 +29,11 @@
     };
 
     extraPlugins = {
-      cole = {
+      vague-nvim = {
+        package = vague-plugin;
         setup = ''
-          vim.cmd.colorscheme("cole")
+          require("vague").setup({})
+          vim.cmd('colorscheme vague')
         '';
       };
     };

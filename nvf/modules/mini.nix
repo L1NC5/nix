@@ -12,7 +12,6 @@
     ];
     mini = {
       ai.enable = true;
-      animate.enable = true;
       basics.enable = true;
       files.enable = true;
       icons.enable = true;

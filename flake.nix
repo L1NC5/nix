@@ -30,8 +30,8 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    cole-nvim = {
-      url = "github:thekylehuang/cole.nvim";
+    vague-nvim = {
+      url = "github:vague-theme/vague.nvim";
       flake = false;
     };
   };
@@ -47,15 +47,12 @@
         packages.neovim =
           (inputs.nvf.lib.neovimConfiguration {
             inherit pkgs;
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = {
+              inherit inputs;
+              vague-nvim-src = inputs.vague-nvim;
+            };
             modules = [
               ./nvf/nvf-config.nix
-              ({ ... }: {
-                config.vim.extraPlugins.cole.package = pkgs.vimUtils.buildVimPlugin {
-                  name = "cole";
-                  src = inputs.cole-nvim;
-                };
-              })
             ];
           }).neovim;
       };

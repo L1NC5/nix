@@ -1,11 +1,13 @@
-{ inputs, ... }:
 {
   flake.modules.homeManager.nvf =
-    { pkgs, ... }:
+    { inputs, pkgs, ... }:
     {
       home.packages = [
         (inputs.nvf.lib.neovimConfiguration {
           inherit pkgs;
+          extraSpecialArgs = {
+            vague-nvim-src = inputs.vague-nvim;
+          };
           modules = [ ../../nvf/nvf-config.nix ];
         }).neovim
       ];
