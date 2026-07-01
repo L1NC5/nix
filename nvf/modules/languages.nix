@@ -1,4 +1,3 @@
-{ ... }:
 {
   config.vim = {
     diagnostics.enable = true;
@@ -9,7 +8,13 @@
       bash.enable = true;
       css.enable = true;
       json.enable = true;
-      nix.enable = true;
+      nix = {
+        enable = true;
+        lsp = {
+          enable = true;
+          servers = [ "nixd" ];
+        };
+      };
       html = {
         enable = true;
         treesitter.autotagHtml = true;
@@ -50,7 +55,6 @@
       otter-nvim.enable = true;
       presets = {
         bash-language-server.enable = true;
-        nixd.enable = true;
         tailwindcss-language-server.enable = true;
       };
       servers = {
@@ -60,15 +64,10 @@
             "sh"
           ];
         };
-
         nixd = {
-          filetypes = [ "nix" ];
-          settings = {
-            options = {
-              nixos.expr = "((builtins.getFlake \"github:nixos/nixpkgs/nixos-unstable\").lib.nixosSystem { system = \"x86_64-linux\"; modules = []; }).options";
-              home-manager.expr = "((builtins.getFlake \"github:nix-community/home-manager\").lib.homeManagerConfiguration { pkgs = import (builtins.getFlake \"github:nixos/nixpkgs/nixos-unstable\") {}; modules = []; }).options";
-              nvf.expr = "((builtins.getFlake \"github:NotAShelf/nvf\").lib.neovimConfiguration { pkgs = import (builtins.getFlake \"github:nixos/nixpkgs/nixos-unstable\") {}; modules = []; }).options";
-            };
+          init_options = {
+            nixos.expr = "(builtins.getFlake \"/nix/store/mcjj0vjbpsmk3z6yqrzhqign3l1rb24w-w17vgjj0szm25p4g71srsip220rvyplg-source\").nixosConfigurations.alchemist.options";
+            home-manager.expr = "(builtins.getFlake \"flake:.\").nixosConfigurations.alchemist.options.home-manager.users.type.nestedTypes.elemType.getSubOptions [ ]";
           };
         };
       };

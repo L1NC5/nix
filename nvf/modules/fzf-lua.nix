@@ -27,36 +27,43 @@
         }
         # Search
         {
-          key = "<leader>sg";
+          key = "<leader>fg";
           mode = "n";
           silent = true;
           action = "<cmd>FzfLua live_grep<cr>";
           desc = "Live grep";
         }
         {
-          key = "<leader>sw";
+          key = "<leader>fw";
           mode = "n";
           silent = true;
           action = "<cmd>FzfLua grep_visual<cr>";
           desc = "Grep word under cursor";
         }
         {
-          key = "<leader>sw";
+          key = "<leader>fw";
           mode = "v";
           silent = true;
           action = "<cmd>FzfLua grep_visual<cr>";
           desc = "Grep selection";
         }
         {
-          key = "<leader>sr";
+          key = "<leader>fR";
           mode = "n";
           silent = true;
           action = "<cmd>FzfLua grep_visual<cr>";
           desc = "Resume last search";
         }
+        {
+          key = "<leader>ft";
+          mode = "n";
+          silent = true;
+          action = "<cmd>TodoQuickFix<cr><cmd>FzfLua quickfix<cr>";
+          desc = "Todo comments (quickfix)";
+        }
         # Buffers
         {
-          key = "<leader>bb";
+          key = "<leader>fb";
           mode = "n";
           silent = true;
           action = "<cmd>FzfLua buffers<cr>";

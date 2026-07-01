@@ -1,5 +1,4 @@
 {
-  inputs,
   vague-nvim-src,
   pkgs,
   ...
@@ -16,16 +15,31 @@ in
     ./modules/fzf-lua.nix
     ./modules/languages.nix
     ./modules/mini.nix
+    ./modules/ufo.nix
   ];
 
   config.vim = {
     binds.whichKey.enable = true;
     comments.comment-nvim.enable = true;
     theme.enable = false;
+    git.enable = true;
+
+    diagnostics.enable = true;
+    notes = {
+      todo-comments = {
+        enable = true;
+      };
+    };
+
     ui = {
-      ui2.enable = true;
       colorizer.enable = true;
-      # nvim-ufo.enable = true;
+      ui2.enable = true;
+      nvim-ufo.enable = true;
+      borders.plugins.lspsaga.enable = true;
+    };
+
+    visuals = {
+      fidget-nvim.enable = true;
     };
 
     extraPlugins = {
@@ -35,6 +49,34 @@ in
           require("vague").setup({})
           vim.cmd('colorscheme vague')
         '';
+      };
+      plenary-nvim = {
+        package = pkgs.vimPlugins.plenary-nvim;
+      };
+      neoscroll-nvim = {
+        package = pkgs.vimPlugins.neoscroll-nvim;
+        setup = "
+        require('neoscroll').setup({
+          mappings = {
+            '<C-u>', '<C-d>',
+            '<C-b>', '<C-f>',
+            '<C-y>', '<C-e>',
+            'zt', 'zz', 'zb',
+          },
+          hide_cursor = true,
+          stop_eof = true,
+          respect_scrolloff = false,
+          cursor_scrolls_alone = true,
+          duration_multiplier = 1.0,
+          easing = 'linear',
+          pre_hook = nil,
+          post_hook = nil,
+          performance_mode = false,
+          ignored_events = {
+              'WinScrolled', 'CursorMoved'
+          },
+        })
+        ";
       };
     };
   };
