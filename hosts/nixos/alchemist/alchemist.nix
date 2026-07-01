@@ -3,9 +3,6 @@
   self,
   ...
 }:
-let
-  flakePath = "path:${inputs.self.outPath}";
-in
 {
   flake.nixosConfigurations.alchemist = inputs.nixpkgs.lib.nixosSystem {
     specialArgs = { inherit inputs self; };
@@ -42,6 +39,10 @@ in
         user = "l1nc5";
         group = "users";
       };
+      nix.settings = {
+        trusted-users = [ "root" "l1nc5" ];
+      }
+      ;
       system.stateVersion = "25.11";
     };
 }
