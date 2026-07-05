@@ -1,8 +1,9 @@
 {
   flake.modules = {
     nixos.niri = { pkgs, ... }: {
-      environment.systemPackages = [
-        pkgs.niri
+      environment.systemPackages = with pkgs; [
+        niri
+        xwayland-satellite
       ];
       programs.niri.enable = true;
     };
