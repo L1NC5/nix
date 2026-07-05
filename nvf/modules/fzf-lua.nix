@@ -1,5 +1,4 @@
-{ ... }:
-{
+{pkgs, ...}: {
   config = {
     vim = {
       fzf-lua = {
@@ -125,6 +124,9 @@
           action = "<cmd>FzfLua diagnostics_workspace<cr>";
           desc = "Workspace diagnostics";
         }
+      ];
+      extraPackages = with pkgs; [
+        fzf
       ];
     };
   };

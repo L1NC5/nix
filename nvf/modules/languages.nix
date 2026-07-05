@@ -1,6 +1,12 @@
 {
   config.vim = {
-    diagnostics.enable = true;
+    diagnostics = {
+      enable = true;
+      presets = {
+        eslint_d.enable = true;
+        htmlhint.enable = true;
+      };
+    };
     languages = {
       enableExtraDiagnostics = true;
       enableFormat = true;
@@ -12,28 +18,45 @@
         enable = true;
         lsp = {
           enable = true;
-          servers = [ "nixd" ];
+          servers = ["nixd"];
         };
       };
       html = {
         enable = true;
+        lsp.enable = true;
         treesitter.autotagHtml = true;
       };
       tsx = {
         enable = true;
+        format.type = [
+          "biome"
+          "biome-organize-imports"
+          # "prettier"
+        ];
       };
       typescript = {
         enable = true;
         extensions.ts-error-translator.enable = true;
+        extraDiagnostics = {
+          enable = true;
+          types = [
+            "eslint_d"
+          ];
+        };
+        format.type = [
+          "biome"
+          "biome-organize-imports"
+          # "prettier"
+        ];
       };
     };
+
     autocomplete = {
       blink-cmp = {
         enable = true;
         friendly-snippets.enable = true;
         setupOpts = {
           completion = {
-            ghost_text.enabled = true;
             documentation = {
               auto_show = true;
               auto_show_delay_ms = 200;
@@ -49,6 +72,7 @@
         };
       };
     };
+
     autopairs.nvim-autopairs.enable = true;
     lsp = {
       enable = true;
@@ -65,15 +89,66 @@
           ];
         };
         nixd = {
-          init_options = {
-            nixos.expr = "(builtins.getFlake \"/nix/store/mcjj0vjbpsmk3z6yqrzhqign3l1rb24w-w17vgjj0szm25p4g71srsip220rvyplg-source\").nixosConfigurations.alchemist.options";
-            home-manager.expr = "(builtins.getFlake \"flake:.\").nixosConfigurations.alchemist.options.home-manager.users.type.nestedTypes.elemType.getSubOptions [ ]";
+          settings = {
+            nixd = {
+              nixpkgs.expr = "import <nixpkgs> { }";
+              formatting.command = ["nixfmt"];
+              fallback_target = "nvf";
+              options = {
+                nixos.expr = "(import ./nixd-options.nix).nixos";
+                home-manager.expr = "(import ./nixd-options.nix).home-manager";
+                nvf.expr = "(import ./nixd-options.nix).nvf";
+              };
+            };
           };
         };
       };
     };
     formatter.conform-nvim = {
       enable = true;
+      setupOpts = {
+        formatters = {
+          biome = {
+            require_cwd = true;
+          };
+          eslint_d = {
+            require_cwd = true;
+          };
+        };
+        format_on_save = {
+          timeout_ms = 500;
+          lsp_fallback = false;
+        };
+        notify_on_error = true;
+        notify_no_formatters = true;
+      };
+    };
+    luaConfigRC = {
+      biome-lsp = ''
+        vim.lsp.config('biome', {
+          cmd = { 'biome', 'lsp-proxy' },
+          filetypes = {
+            'astro', 'css', 'graphql', 'html',
+            'javascript', 'javascriptreact',
+            'json', 'jsonc', 'svelte',
+            'typescript', 'typescriptreact', 'vue',
+          },
+          root_dir = function(bufnr, on_dir)
+            local root_files = { 'biome.json', 'biome.jsonc' }
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            local found = vim.fs.find(root_files, { path = fname, upward = true })[1]
+            if found then
+              on_dir(vim.fs.dirname(found))
+            end
+          end,
+          workspace_required = true,
+        })
+
+        vim.lsp.enable('biome')
+      '';
+      disable-lsp-document-colors = ''
+        vim.lsp.document_color.enable(false)
+      '';
     };
   };
 }

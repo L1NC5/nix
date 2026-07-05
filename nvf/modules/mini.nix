@@ -16,7 +16,7 @@
       icons.enable = true;
       indentscope.enable = true;
       move.enable = true;
-      notify.enable = true;
+      # notify.enable = true;
       pairs.enable = true;
       statusline.enable = true;
       surround.enable = true;
