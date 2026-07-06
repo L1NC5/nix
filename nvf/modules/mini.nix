@@ -11,12 +11,19 @@
     ];
     mini = {
       ai.enable = true;
-      basics.enable = true;
+      basics = {
+        enable = true;
+        setupOpts = {
+          options = {
+            basic = true;
+            extra_ui = true;
+          };
+          mappings.windows = true;
+        };
+      };
       files.enable = true;
       icons.enable = true;
-      indentscope.enable = true;
       move.enable = true;
-      # notify.enable = true;
       pairs.enable = true;
       statusline.enable = true;
       surround.enable = true;

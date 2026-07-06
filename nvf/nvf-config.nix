@@ -2,18 +2,20 @@
   vague-nvim-src,
   pkgs,
   ...
-}: let
+}:
+let
   vague-plugin = pkgs.vimUtils.buildVimPlugin {
     name = "vague-nvim";
     src = vague-nvim-src;
   };
-in {
+in
+{
   imports = [
     ./modules/base.nix
     ./modules/fzf-lua.nix
     ./modules/languages.nix
     ./modules/mini.nix
-    ./modules/ufo.nix
+    ./modules/ui.nix
   ];
 
   config.vim = {
@@ -33,24 +35,6 @@ in {
         enable = true;
         theme = "dashboard";
       };
-    };
-
-    ui = {
-      borders.plugins.lspsaga.enable = true;
-      colorizer.enable = false;
-      illuminate.enable = true;
-      nvim-highlight-colors = {
-        enable = true;
-        setupOpts = {
-          render = "background";
-          enable_tailwind = true;
-        };
-      };
-      nvim-ufo.enable = true;
-    };
-
-    visuals = {
-      fidget-nvim.enable = true;
     };
 
     extraPlugins = {
