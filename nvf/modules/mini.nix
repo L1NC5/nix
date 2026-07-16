@@ -21,12 +21,10 @@
           mappings.windows = true;
         };
       };
-      files.enable = true;
       icons.enable = true;
       move.enable = true;
       pairs.enable = true;
       statusline.enable = true;
-      surround.enable = true;
       tabline.enable = true;
     };
   };

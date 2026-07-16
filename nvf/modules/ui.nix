@@ -15,7 +15,13 @@
     };
 
     visuals = {
-      blink-indent.enable = true;
+      blink-indent = {
+        enable = true;
+        setupOpts = {
+          static.highlights = ["BlinkIndent"];
+          scope.highlights = ["BlinkIndentScope1" "BlinkIndentScope2" "BlinkIndentScope3" "BlinkIndentScope4"];
+        };
+      };
       fidget-nvim.enable = true;
       nvim-scrollbar.enable = true;
       nvim-web-devicons.enable = true;

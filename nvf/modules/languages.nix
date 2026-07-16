@@ -30,7 +30,6 @@
         enable = true;
         format.type = [
           "biome"
-          "biome-organize-imports"
           # "prettier"
         ];
       };
@@ -45,7 +44,6 @@
         };
         format.type = [
           "biome"
-          "biome-organize-imports"
           # "prettier"
         ];
       };
@@ -54,7 +52,6 @@
     autocomplete = {
       blink-cmp = {
         enable = true;
-        friendly-snippets.enable = true;
         setupOpts = {
           completion = {
             documentation = {
@@ -88,6 +85,20 @@
             "sh"
           ];
         };
+        tailwindcss-language-server = {
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = [
+                  ["cva\\(([^)]*)\\)" "[\"'`]([^\"'`]*)[\"'`]"]
+                  ["clsx\\(([^)]*)\\)" "[\"'`]([^\"'`]*)[\"'`]"]
+                  ["cx\\(([^)]*)\\)" "[\"'`]([^\"'`]*)[\"'`]"]
+                  ["\\w*Config\\s*=\\s*\\{([^}]*)\\}" "[\"'`]([^\"'`]*)[\"'`]"]
+                ];
+              };
+            };
+          };
+        };
         nixd = {
           settings = {
             nixd = {
@@ -104,11 +115,14 @@
         };
       };
     };
+
     formatter.conform-nvim = {
       enable = true;
       setupOpts = {
         formatters = {
           biome = {
+            args = ["check" "--write" "--stdin-file-path" "$FILENAME"];
+            stdin = true;
             require_cwd = true;
           };
           eslint_d = {
