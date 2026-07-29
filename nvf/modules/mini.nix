@@ -25,7 +25,6 @@
       move.enable = true;
       pairs.enable = true;
       statusline.enable = true;
-      tabline.enable = true;
     };
   };
 }

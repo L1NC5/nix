@@ -2,6 +2,7 @@
   flake.modules.nixos.l1nc5 = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       keyd
+      sabnzbd
       telegram-desktop
 
       # Desktop

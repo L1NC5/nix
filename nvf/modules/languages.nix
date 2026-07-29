@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   config.vim = {
     diagnostics = {
@@ -163,6 +164,21 @@
       disable-lsp-document-colors = ''
         vim.lsp.document_color.enable(false)
       '';
+    };
+    diagnostics.config = {
+      signs.text = lib.generators.mkLuaInline ''
+        {
+          [vim.diagnostic.severity.ERROR] = "󰅚 ",
+          [vim.diagnostic.severity.WARN] = "󰀪 ",
+        }
+      '';
+      virtual_text = {
+        format = lib.generators.mkLuaInline ''
+          function(diagnostic)
+            return string.format("%s (%s)", diagnostic.message, diagnostic.source)
+          end
+        '';
+      };
     };
   };
 }

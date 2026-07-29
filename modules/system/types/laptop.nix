@@ -1,32 +1,39 @@
-{ inputs, ... }:
-{
-  flake.modules.nixos.system-laptop =
-    { pkgs, ... }:
-    {
-      imports = with inputs.self.modules.nixos; [
-        system-core
+{inputs, ...}: {
+  flake.modules.nixos.system-laptop = {pkgs, ...}: {
+    imports = with inputs.self.modules.nixos; [
+      system-core
 
-        # Hardware
-        bluetooth
-        graphics
-        laptop-lid
-        power-management
+      # Hardware
+      bluetooth
+      graphics
+      laptop-lid
+      power-management
 
-        # Services
-        plymouth
-        gnome-keyring
-        pipewire
-        sddm
+      # Services
+      plymouth
+      gnome-keyring
+      pipewire
+      sddm
 
-        # Desktop
-        niri
-      ];
-      # Print
-      services.printing = {
+      # Desktop
+      niri
+    ];
+    # Print
+    services = {
+      printing = {
         enable = true;
         drivers = [
           pkgs.hplipWithPlugin
         ];
       };
+
+      udisks2.enable = true;
+      gvfs.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      udiskie
+      libnotify # Fornisce notify-send usata da udiskie
+    ];
+  };
 }
