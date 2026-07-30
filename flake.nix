@@ -38,6 +38,7 @@
       url = "github:vague-theme/vague.nvim";
       flake = false;
     };
+    nixpkgs-logseq.url = "github:nixos/nixpkgs/7525d999cd850b9a488817abc89c75dc733acf17";
   };
 
   outputs = inputs:
