@@ -1,8 +1,17 @@
 {
   description = "l1nc5's nix-config";
+
+  nixConfig = {
+    extra-substituters = ["https://noctalia.cachix.org"];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-zed.url = "github:nixos/nixpkgs/6b51cbf735e07b2851dc3fc78dd6ff41198dd393";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,8 +21,9 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf = {
@@ -24,35 +34,35 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    home-manager,
-    nixos-hardware,
-    ...
-  }: let
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations.alchemist = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {inherit inputs;};
-      modules = [
-        {
-          nixpkgs.config.allowUnfree = true;
-        }
-
-        ./system/hosts/alchemist
-        nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.l1nc5 = import ./home/profiles/l1nc5/home.nix;
-        }
-      ];
+    vague-nvim = {
+      url = "github:vague-theme/vague.nvim";
+      flake = false;
     };
+    nixpkgs-logseq.url = "github:nixos/nixpkgs/7525d999cd850b9a488817abc89c75dc733acf17";
   };
+
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        (inputs.import-tree ./hosts)
+        (inputs.import-tree ./modules)
+      ];
+      perSystem = {pkgs, ...}: {
+        packages.neovim =
+          (inputs.nvf.lib.neovimConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit inputs;
+              vague-nvim-src = inputs.vague-nvim;
+            };
+            modules = [
+              ./nvf/nvf-config.nix
+            ];
+          }).neovim;
+      };
+      _module.args = {
+        inherit inputs;
+        noctaliaModule = inputs.noctalia.homeModules.default;
+      };
+    };
 }
