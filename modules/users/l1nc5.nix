@@ -44,7 +44,7 @@
     imports = with inputs.self.modules.homeManager; [
       # Dev
       lazygit
-      nvf
+      scribe
       zed
 
       # Browsers

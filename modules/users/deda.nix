@@ -9,7 +9,6 @@
         fastfetch
         lazygit
        	nh
-        nvf
         starship
         tmux
         zsh

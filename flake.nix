@@ -26,10 +26,7 @@
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf = {
-      url = "github:NotAShelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    scribe.url = "github:L1NC5/scribe";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,19 +44,6 @@
         (inputs.import-tree ./hosts)
         (inputs.import-tree ./modules)
       ];
-      perSystem = {pkgs, ...}: {
-        packages.neovim =
-          (inputs.nvf.lib.neovimConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit inputs;
-              vague-nvim-src = inputs.vague-nvim;
-            };
-            modules = [
-              ./nvf/nvf-config.nix
-            ];
-          }).neovim;
-      };
       _module.args = {
         inherit inputs;
         noctaliaModule = inputs.noctalia.homeModules.default;
